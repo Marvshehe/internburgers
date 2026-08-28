@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Login - Electro</title>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.css">
+	<link type="text/css" rel="stylesheet" href="css/font-awesome.min.css">
+	<link type="text/css" rel="stylesheet" href="css/style.css">
+	<style>
+		.auth-page {
+			margin: 0;
+			min-height: 100vh;
+			background: linear-gradient(135deg, #fff8ef 0%, #ffe5b4 35%, #f8d6a5 100%);
+			font-family: 'Montserrat', sans-serif;
+			color: #1d1d1d;
+		}
+		.auth-shell {
+			display: flex;
+			min-height: 100vh;
+			align-items: stretch;
+		}
+		.auth-visual {
+			flex: 1.1;
+			padding: 60px 48px;
+			background: radial-gradient(circle at top left, rgba(255,255,255,0.45), rgba(255,255,255,0.05)), #20170d;
+			color: #fff;
+			position: relative;
+			overflow: hidden;
+		}
+		.auth-visual::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+			opacity: 0.22;
+		}
+		.auth-visual > * {
+			position: relative;
+			z-index: 1;
+		}
+		.brand-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 10px 16px;
+			border-radius: 999px;
+			background: rgba(255, 190, 51, 0.18);
+			border: 1px solid rgba(255, 190, 51, 0.7);
+			font-size: 12px;
+			font-weight: 700;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+		.auth-visual h1 {
+			max-width: 420px;
+			font-size: 3rem;
+			font-weight: 800;
+			line-height: 1.08;
+			margin: 32px 0 16px;
+		}
+		.auth-visual p {
+			max-width: 420px;
+			font-size: 1rem;
+			line-height: 1.8;
+			color: rgba(255,255,255,0.8);
+		}
+		.auth-feature-list {
+			list-style: none;
+			padding: 0;
+			margin: 28px 0 0;
+			display: grid;
+			gap: 14px;
+		}
+		.auth-feature-list li {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			background: rgba(255,255,255,0.06);
+			border: 1px solid rgba(255,255,255,0.1);
+			padding: 12px 14px;
+			border-radius: 12px;
+			backdrop-filter: blur(2px);
+		}
+		.auth-feature-list li span {
+			display: inline-flex;
+			width: 30px;
+			height: 30px;
+			border-radius: 50%;
+			align-items: center;
+			justify-content: center;
+			background: #ffbe33;
+			color: #1d1d1d;
+			font-weight: 800;
+		}
+		.auth-panel {
+			flex: 0.9;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 30px;
+			background: rgba(255,255,255,0.8);
+		}
+		.auth-card {
+			width: 100%;
+			max-width: 440px;
+			background: #fff;
+			border-radius: 24px;
+			padding: 34px 30px;
+			box-shadow: 0 22px 60px rgba(39, 29, 12, 0.18);
+			border: 1px solid rgba(0,0,0,0.04);
+		}
+		.auth-topbar {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 18px;
+		}
+		.auth-brand {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			font-weight: 700;
+			color: #222;
+		}
+		.auth-brand img {
+			width: 38px;
+			height: 38px;
+			border-radius: 50%;
+		}
+		.auth-link {
+			font-size: 13px;
+			color: #ff9f1c;
+			font-weight: 700;
+		}
+		.auth-heading {
+			margin-bottom: 22px;
+		}
+		.auth-kicker {
+			display: inline-block;
+			background: #fff4df;
+			color: #b86500;
+			padding: 7px 12px;
+			border-radius: 999px;
+			font-weight: 700;
+			font-size: 12px;
+			letter-spacing: 0.7px;
+			text-transform: uppercase;
+		}
+		.auth-heading .title {
+			margin: 12px 0 8px;
+			font-size: 2rem;
+			font-weight: 800;
+			color: #1f1f1f;
+		}
+		.auth-heading p {
+			margin: 0;
+			color: #6b6b6b;
+			line-height: 1.7;
+		}
+		.form-group {
+			margin-bottom: 16px;
+		}
+		.input {
+			width: 100%;
+			height: 52px;
+			padding: 0 16px;
+			border: 1px solid #e8d9bb;
+			border-radius: 12px;
+			background: #fffdf9;
+			font-size: 15px;
+			outline: none;
+			transition: border-color .2s, box-shadow .2s;
+		}
+		.input:focus {
+			border-color: #ffbe33;
+			box-shadow: 0 0 0 4px rgba(255,190,51,0.15);
+		}
+		.checkout-error {
+			padding: 10px 12px;
+			border-radius: 10px;
+			background: #fff1f1;
+			color: #c0392b;
+			font-size: 14px;
+			line-height: 1.5;
+			border: 1px solid #f6caca;
+		}
+		.primary-btn.auth-submit {
+			display: block;
+			width: 100%;
+			height: 52px;
+			border: none;
+			border-radius: 12px;
+			background: linear-gradient(135deg, #ffbe33 0%, #ff9f1c 100%);
+			color: #1d1d1d;
+			font-weight: 800;
+			font-size: 15px;
+			letter-spacing: 0.4px;
+			cursor: pointer;
+			box-shadow: 0 10px 20px rgba(255,157,28,0.25);
+			margin-top: 12px;
+		}
+		.primary-btn.auth-submit:hover {
+			opacity: 0.96;
+		}
+		.auth-card p {
+			margin: 18px 0 0;
+			text-align: center;
+			font-size: 14px;
+			color: #666;
+		}
+		.auth-card a {
+			color: #ff8c00;
+			font-weight: 700;
+		}
+		@media (max-width: 900px) {
+			.auth-shell {
+				display: block;
+			}
+			.auth-visual {
+				min-height: 260px;
+				padding: 40px 24px;
+			}
+			.auth-visual h1 {
+				font-size: 2.4rem;
+			}
+			.auth-panel {
+				padding: 24px 16px 40px;
+			}
+		}
+	</style>
+</head>
+<body data-page="login" class="auth-page">
+	<div class="auth-shell">
+		<aside class="auth-visual">
+			<div class="brand-badge">🍔 Marvs Burgers</div>
+			<h1>Fast food, fresh flavor, delivered fast.</h1>
+			<p>Order your favorite burgers, sides, and combo meals with secure checkout and a verified account.</p>
+			<ul class="auth-feature-list">
+				<li><span>✓</span> Secure login and registration</li>
+				<li><span>✓</span> Quick cart and checkout flow</li>
+				<li><span>✓</span> Fresh food ordering made easy</li>
+			</ul>
+		</aside>
+		<main class="auth-panel">
+			<div class="auth-card">
+				<div class="auth-topbar">
+					<div class="auth-brand">
+						<img src="images/favicon.png" alt="Marvs burgers store">
+						<span>Marvs Burgers</span>
+					</div>
+					<a href="index.html" class="auth-link">Back to home</a>
+				</div>
+				<div class="auth-heading">
+					<span class="auth-kicker">Welcome back</span>
+					<h3 class="title">Login to your account</h3>
+					<p>Sign in to purchase your favorite meals.</p>
+				</div>
+				<form id="login-form" novalidate>
+					<div class="form-group"><input class="input" type="email" id="login-email" placeholder="Gmail address" required></div>
+					<div class="form-group"><input class="input" type="password" id="login-password" placeholder="Password" minlength="6" required></div>
+					<div id="login-error" class="checkout-error" style="display:none;"></div>
+					<button class="primary-btn auth-submit" type="submit"><i class="fa fa-sign-in"></i> Login</button>
+				</form>
+				<p>New customer? <a href="register.html">Create an account</a></p>
+			</div>
+		</main>
+	</div>
+	<script src="js/jquery-3.4.1.min.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script type="module" src="js/firebase.js"></script>
+	<script src="js/auth-cart.js"></script>
+</body>
+</html>
